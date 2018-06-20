@@ -18,7 +18,7 @@ const Problem = db.define('problem', {
         }
     },
     tags: {
-
+        
     },
     hints: {
         type: Sequelize.TEXT,
