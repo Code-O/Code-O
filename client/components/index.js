@@ -5,7 +5,6 @@
  */
 export { default as Navbar } from './navbar'
 export { default as Problems } from './Problems'
-// export {default as Problems} from './Problems'
-// export {default as SingleProblem} from './SingleProblem'
+export { default as SingleProblem } from './SingleProblem'
 export { default as UserHome } from './user-home'
 export { Login, Signup } from './auth-form'

@@ -1,26 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import ProblemTable from './ProblemsTable'
 // import { fetchProblems } from '../store'
 
 function ProblemList(props) {
   const { allProblems } = props
   console.log(allProblems.problems)
   return (
-
-    <ul>
-      {
-        allProblems.map(problem => {
-          return (
-            <li key={problem.id}>
-              <NavLink to={`/problems/${problem.id}`}>
-                {problem.name}
-              </NavLink>
-            </li>
-          )
-        })
-      }
-    </ul>
+    <div>
+      <ProblemTable problems={allProblems} />
+    </div>
   )
 }
 
