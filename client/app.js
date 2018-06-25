@@ -1,14 +1,21 @@
-import React from 'react'
-import {Navbar} from './components'
+import React, { Component } from 'react'
+import { Navbar } from './components'
 import Routes from './routes'
+import store, { fetchProblems } from './store'
 
-const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Routes />
-    </div>
-  )
+export default class App extends Component {
+  componentDidMount() {
+    const problemsThunk = fetchProblems()
+    store.dispatch(problemsThunk)
+    console.log('app is working')
+  }
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Routes />
+      </div>
+    )
+  }
 }
 
-export default App
