@@ -9,38 +9,46 @@ class SingleProblem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            code: ''
+            inputCode: ''
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSumbit = this.handleSumbit.bind(this)
     }
 
     handleChange = event => {
-        console.log("--->", event)
-        // this.setState({
-        //     code: event
-        // })
+        this.setState({
+            inputCode: event
+        })
+    }
+
+    handleSumbit = event => {
+        event.preventDefault();
+        console.log(this.state.inputCode)
     }
     render() {
         const { allProblems, problemId } = this.props
         let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
         return (
-
             <div>
-                {singleProblem.name}
-                <br />
-                <br />
-                {singleProblem.description}
-                <br />
-                <br />
+                <form onSubmit={this.handleSumbit}>
+                    {singleProblem.name}
+                    <br />
+                    <br />
+                    {singleProblem.description}
+                    <br />
+                    <br />
+                    <button type='submit'>RUN TEST</button>
+                    <br />
+                    <br />
+                </form>
                 <AceEditor
                     mode="javascript"
                     theme="monokai"
                     onChange={this.handleChange}
-                    value={``}
+                    value={this.state.inputCode}
                     name="UNIQUE_ID_OF_DIV"
                     editorProps={{ $blockScrolling: true }}
                 />
-                <button type="submit" onSubmit={this.handleChange()}>Submit</button>
             </div>
 
         )
