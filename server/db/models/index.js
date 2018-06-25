@@ -15,8 +15,8 @@ const Problem = require('./problem')
  * instead of: const User = require('../db/models/user')
  */
 
-// User.belongsToMany(Problem)
-// Problem.hasMany(User)
+User.belongsTo(Problem)
+Problem.hasMany(User)
 
 module.exports = {
   User,
