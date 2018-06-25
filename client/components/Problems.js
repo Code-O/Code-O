@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchProblems, postProblem} from '../store'
+import {fetchProblems} from '../store'
 
 
 
@@ -8,11 +8,16 @@ import {fetchProblems, postProblem} from '../store'
 
 class Problems extends Component {
 
+
+// componentDidMount(){
+//   this.props.loadALLProblems()
+// }
+
   render() {
-    console.log('----->',this.props)
+    // console.log('******', this.props)
     return (
       <div>
-        <p>jdkashf</p>
+        <h1>Test</h1>
       </div>
     )     
 }
@@ -26,7 +31,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
   return{
     loadALLProblems:()=>dispatch(fetchProblems()),
-    addProblem:(problemId)=>dispatch(postProblem(problemId))
+    // addProblem:(problemId)=>dispatch(postProblem(problemId))
   }
 }
 
