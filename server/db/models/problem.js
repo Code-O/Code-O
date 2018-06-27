@@ -32,7 +32,10 @@ const Problem = db.define('problem', {
   },
   funcName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+   validate: {
+     notEmpty: true
+   }
   }
 })
 
