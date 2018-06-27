@@ -4,13 +4,13 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
+import socket from '../socket'
 
 class SingleProblem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            inputCode: '',
-            users: {}
+            inputCode: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
@@ -18,7 +18,6 @@ class SingleProblem extends Component {
 
     componentDidMount() {
         socket.emit('room', {room: this.props.problemId})
-        this.setState({ users: users})
     }
 
     componentWillReceiveProps(nextProps) {

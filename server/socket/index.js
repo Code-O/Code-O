@@ -10,7 +10,7 @@ module.exports = io => {
       socket.join(data.room)
     })
 
-    socket.on('leave room', () => {
+    socket.on('leave room', (data) => {
       socket.leave(data.room)
     })
 
