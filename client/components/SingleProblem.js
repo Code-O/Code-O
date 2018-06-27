@@ -9,29 +9,54 @@ class SingleProblem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            inputCode: ''
+            inputCode: '',
+            users: {}
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
+    }
+
+    componentDidMount() {
+        socket.emit('room', {room: this.props.problemId})
+        this.setState({ users: users})
+    }
+
+    componentWillReceiveProps(nextProps) {
+        socket.emit('room', {room: nextProps.problemId})
+    }
+
+    componentWillUnmount() {
+        socket.emit('leave room', {
+            room: this.props.problemId
+        })
     }
 
     handleChange = event => {
         this.setState({
             inputCode: event
         })
+        socket.emit('coding event', {
+            room: this.props.problemId,
+            newCode: event
+        })
+    }
+
+    handleCodeUpdateFromSockets(codePayload) {
+        this.setState({inputCode: codePayload})
     }
 
     handleSumbit = event => {
         event.preventDefault();
         console.log(this.state.inputCode)
     }
+
     render() {
         const { allProblems, problemId } = this.props
         let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
         return (
             <div>
                 <form onSubmit={this.handleSumbit}>
-                    {singleProblem.name}
+                    <strong>{singleProblem.name}</strong>
                     <br />
                     <br />
                     {singleProblem.description}
