@@ -29,6 +29,10 @@ const Problem = db.define('problem', {
   points: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  funcName: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 })
 

@@ -107,43 +107,47 @@ const startListening = () => {
 var problems = [
   {
     name: "Sum of positive",
-    description: "You get an array of numbers, return the sum of all of the positives ones. example [1,-4,7,12] => 1 + 7 + 12 = 20, note: if there is nothing to sum, the sum is default to 0.",
+    description: "You get an array of numbers, return the sum of all of the positives ones.\nexample [1,-4,7,12] => 1 + 7 + 12 = 20, note: if there is nothing to sum, the sum is default to 0.",
     difficulty: "easy",
     tags: "arrays",
     hints: "Try array loops or method",
     solved: false,
     userSubmission: "",
-    points: 1
+    points: 1,
+    funcName: "posSum"
   },
   {
     name: "Pizza Payments",
-    description: "Kate and Michael want to buy a pizza and share it. Depending on the price of the pizza, they are going to divide the costs:1.If the pizza is less than €5,- Michael invites Kate, so Michael pays the full price. 2.Otherwise Kate will contribute 1 / 3 of the price, but no more than €10(she's broke :-) and Michael pays the rest. How much is Michael going to pay? Calculate the amount with two decimals, if necessary.",
+    description: "Kate and Michael want to buy a pizza and share it. Depending on the price of the pizza, they are going to divide the costs:1.\nIf the pizza is less than €5,- Michael invites Kate, so Michael pays the full price. 2.Otherwise Kate will contribute 1 / 3 of the price, but no more than €10(she's broke :-) and Michael pays the rest.\nHow much is Michael going to pay? Calculate the amount with two decimals, if necessary.",
     difficulty: "easy",
     tags: "fundamentals",
     hints: "Try array loops or method",
     solved: false,
     userSubmission: "",
-    points: 1
+    points: 1,
+    funcName: "pizPayment"
   },
   {
     name: "Find the unique number",
-    description: "There is an array with some numbers. All numbers are equal except for one. Try to find it! findUniq([1, 1, 1, 2, 1, 1]) === 2 findUniq([0, 0, 0.55, 0, 0]) === 0.55 It's guaranteed that array contains more than 3 numbers.",
+    description: "There is an array with some numbers. All numbers are equal except for one.\nTry to find it! findUniq([1, 1, 1, 2, 1, 1]) === 2 findUniq([0, 0, 0.55, 0, 0]) === 0.55 It's guaranteed that array contains more than 3 numbers.",
     difficulty: "medium",
     tags: "fundamentals",
     hints: "The tests contain some very huge arrays, so think about performance.",
     solved: false,
     userSubmission: "",
-    points: 2
+    points: 2,
+    funcName: "uniqNum"
   },
   {
     name: "Simple Pig Latin",
-    description: "Move the first letter of each word to the end of it, then add 'ay' to the end of the word. Leave punctuation marks untouched. Examples: pigIt('Pig latin is cool'); pigIt('Hello world !');.",
+    description: "Move the first letter of each word to the end of it, then add 'ay' to the end of the word.\nLeave punctuation marks untouched. Examples: pigIt('Pig latin is cool'); pigIt('Hello world !');.",
     difficulty: "hard",
     tags: "algorithms",
     hints: "",
     solved: false,
     userSubmission: "",
-    points: 3
+    points: 3,
+    funcName: "pigLatin"
   }
 ]
 
