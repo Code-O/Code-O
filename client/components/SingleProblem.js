@@ -4,6 +4,7 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
+import socket from '../socket'
 
 class SingleProblem extends Component {
     constructor(props) {
@@ -13,25 +14,51 @@ class SingleProblem extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
+        socket.on('receive code', (payload) => {
+            this.handleCodeUpdateFromSockets(payload)
+        })
+    }
+
+    componentDidMount() {
+        socket.emit('room', {room: this.props.problemId})
+    }
+
+    componentWillReceiveProps(nextProps) {
+        socket.emit('room', {room: nextProps.problemId})
+    }
+
+    componentWillUnmount() {
+        socket.emit('leave room', {
+            room: this.props.problemId
+        })
     }
 
     handleChange = event => {
         this.setState({
             inputCode: event
         })
+        socket.emit('coding event', {
+            room: this.props.problemId,
+            newCode: event
+        })
+    }
+
+    handleCodeUpdateFromSockets(payload) {
+        this.setState({inputCode: payload.newCode})
     }
 
     handleSumbit = event => {
         event.preventDefault();
         console.log(this.state.inputCode)
     }
+
     render() {
         const { allProblems, problemId } = this.props
         let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
         return (
             <div>
                 <form onSubmit={this.handleSumbit}>
-                    {singleProblem.name}
+                    <strong>{singleProblem.name}</strong>
                     <br />
                     <br />
                     {singleProblem.description}
@@ -48,6 +75,7 @@ class SingleProblem extends Component {
                     value={this.state.inputCode}
                     name="UNIQUE_ID_OF_DIV"
                     editorProps={{ $blockScrolling: true }}
+                    defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
                 />
             </div>
 
