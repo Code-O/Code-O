@@ -14,6 +14,9 @@ class SingleProblem extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
+        socket.on('receive code', (payload) => {
+            this.handleCodeUpdateFromSockets(payload)
+        })
     }
 
     componentDidMount() {
@@ -40,8 +43,8 @@ class SingleProblem extends Component {
         })
     }
 
-    handleCodeUpdateFromSockets(codePayload) {
-        this.setState({inputCode: codePayload})
+    handleCodeUpdateFromSockets(payload) {
+        this.setState({inputCode: payload.newCode})
     }
 
     handleSumbit = event => {

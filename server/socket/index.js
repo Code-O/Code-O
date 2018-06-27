@@ -15,7 +15,7 @@ module.exports = io => {
     })
 
     socket.on('coding event', (data) => {
-      socket.broadcast.to(data.room).emit('received code', data)
+      socket.broadcast.to(data.room).emit('receive code', data)
     })
   })
 }
