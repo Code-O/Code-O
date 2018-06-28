@@ -5,6 +5,8 @@ import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import socket from '../socket'
+import { Button, Icon, Col, Card, CardTitle, Badge } from 'react-materialize'
+
 
 class SingleProblem extends Component {
     constructor(props) {
@@ -20,11 +22,11 @@ class SingleProblem extends Component {
     }
 
     componentDidMount() {
-        socket.emit('room', {room: this.props.problemId})
+        socket.emit('room', { room: this.props.problemId })
     }
 
     componentWillReceiveProps(nextProps) {
-        socket.emit('room', {room: nextProps.problemId})
+        socket.emit('room', { room: nextProps.problemId })
     }
 
     componentWillUnmount() {
@@ -44,7 +46,7 @@ class SingleProblem extends Component {
     }
 
     handleCodeUpdateFromSockets(payload) {
-        this.setState({inputCode: payload.newCode})
+        this.setState({ inputCode: payload.newCode })
     }
 
     handleSumbit = event => {
@@ -57,16 +59,16 @@ class SingleProblem extends Component {
         let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
         return (
             <div>
-                <form onSubmit={this.handleSumbit}>
-                    <strong>{singleProblem.name}</strong>
-                    <br />
-                    <br />
+                <Card
+                    className='blue-grey darken-1'
+                    textClassName='white-text'
+                    title={singleProblem.name}
+                >
+
                     {singleProblem.description}
-                    <br />
-                    <br />
+                </Card>
+                <form onSubmit={this.handleSumbit}>
                     <button type='submit'>RUN TEST</button>
-                    <br />
-                    <br />
                 </form>
                 <AceEditor
                     mode="javascript"

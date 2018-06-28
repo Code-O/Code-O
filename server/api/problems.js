@@ -8,20 +8,20 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-    Problem.create(req.body)
-        .then(problem => res.json(problem))
-        .catch(next)
-})
+// router.post('/', (req, res, next) => {
+//     Problem.create(req.body)
+//         .then(problem => res.json(problem))
+//         .catch(next)
+// })
 
-router.delete('/:id', (req, res, next) => {
-    Problem.findById(req.params.id)
-        .then(problem => res.json(problem))
-        .catch(next)
-})
+// router.delete('/:id', (req, res, next) => {
+//     Problem.findById(req.params.id)
+//         .then(problem => res.json(problem))
+//         .catch(next)
+// })
 
-router.put('/:id', (req, res, next) => {
-    Problem.findById(req.params.id)
-        .then(problem => res.json(problem))
-        .catch(next)
-})
+// router.put('/:id', (req, res, next) => {
+//     Problem.findById(req.params.id)
+//         .then(problem => res.json(problem))
+//         .catch(next)
+// })
