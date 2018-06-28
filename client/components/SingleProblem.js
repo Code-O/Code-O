@@ -80,7 +80,7 @@ class SingleProblem extends Component {
                     value={this.state.inputCode}
                     name="UNIQUE_ID_OF_DIV"
                     editorProps={{ $blockScrolling: true }}
-                    defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
+                    defaultValue={`function ${singleProblem.funcName}(arr) {\n\n}`}
                 />
             </div>
             )
