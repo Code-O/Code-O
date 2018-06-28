@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import brace from 'brace'
+import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
@@ -21,37 +22,43 @@ class SingleProblem extends Component {
         })
     }
 
-    componentDidMount() {
-        socket.emit('room', { room: this.props.problemId })
-    }
 
-    componentWillReceiveProps(nextProps) {
-        socket.emit('room', { room: nextProps.problemId })
-    }
+    // componentDidMount() {
+    //     socket.emit('room', {room: this.props.problemId})
+    // }
 
-    componentWillUnmount() {
-        socket.emit('leave room', {
-            room: this.props.problemId
-        })
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     socket.emit('room', {room: nextProps.problemId})
+    // }
+
+    // componentWillUnmount() {
+    //     socket.emit('leave room', {
+    //         room: this.props.problemId
+    //     })
+    // }
+
+
 
     handleChange = event => {
         this.setState({
             inputCode: event
         })
-        socket.emit('coding event', {
-            room: this.props.problemId,
-            newCode: event
-        })
+        // socket.emit('coding event', {
+        //     room: this.props.problemId,
+        //     newCode: event
+        // })
     }
 
-    handleCodeUpdateFromSockets(payload) {
-        this.setState({ inputCode: payload.newCode })
-    }
+    // handleCodeUpdateFromSockets(payload) {
+    //     this.setState({inputCode: payload.newCode})
+    // }
 
     handleSumbit = event => {
         event.preventDefault();
         console.log(this.state.inputCode)
+        axios
+      .post('/api/problems', {code: this.state.inputCode})
+      .catch(err => console.log(err))
     }
 
     render() {
@@ -80,17 +87,16 @@ class SingleProblem extends Component {
                     defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
                 />
             </div>
-
-        )
-    }
+            )
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const problemId = Number(ownProps.match.params.id)
-    return {
-        allProblems: state.problems,
-        problemId
-    }
+  const problemId = Number(ownProps.match.params.id)
+  return {
+    allProblems: state.problems,
+    problemId
+  }
 }
 
 // const mapDispatchToProps = (dispatch) => {
@@ -100,7 +106,4 @@ const mapStateToProps = (state, ownProps) => {
 //     }
 // }
 
-export default connect(
-    mapStateToProps,
-    null,
-)(SingleProblem)
+export default connect(mapStateToProps)(SingleProblem)
