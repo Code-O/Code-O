@@ -1,18 +1,18 @@
 const {exec} = require('child_process')
 const args = process.argv
 const myFunc = args[2]
-const userValue = eval(myFunc)
-
-// const myFunc = arr => {
-//   return arr.reduce((a, b) => {
-//     return a + b
-//   }, 0)
-// }
+const userValue = eval(
+  myFunc +
+    `${myFunc.slice(
+      myFunc.indexOf(' ') + 1,
+      myFunc.indexOf('(')
+    )}([2,3,10,5,8,1,4,7,9,6])`
+)
 
 let funcBody = myFunc.slice(myFunc.indexOf('{'), myFunc.lastIndexOf('}') + 1)
-let funcArgs = myFunc.slice(myFunc.indexOf('(') + 1, myFunc.indexOf('{') - 1)
+let funcArgs = myFunc.slice(myFunc.indexOf('(') + 1, myFunc.indexOf('{') - 2)
 const myFuncCall = new Function(funcArgs, funcBody)
-
+console.log(funcBody, 'FUNCBODY', funcArgs, 'FUNCARGS', userValue, 'USERSOL')
 function generateData(n) {
   let set = []
   let rando
@@ -43,13 +43,4 @@ exports.compare = {
   }
 }
 require('bench').runMain()
-console.log('mean', userValue)
-
-// exec(`node bench.js '${myFunc.slice(0, -14)}'`, (error, stdout, stderr) => {
-//   if (error) console.log(error)
-//   else {
-//     console.log('data sets*********#$%@%@:', stdout)
-//     console.log('COMPLETE SET===============', stdout, userValue)
-//   }
-// })
-// + `${myFunc.slice(myFunc.indexOf(' ') + 1, myFunc.indexOf('('))}()`
+console.log('solution', userValue)

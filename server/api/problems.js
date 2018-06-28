@@ -10,16 +10,16 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  // exec(`docker run eval:latest "${req.body.code}"`, (error, stdout, stderr) => {
   exec(
-    `node evalFunc.js '${req.body.code}'`,
-    // `docker run eval:latest node evalFunc "${req.body.code}"`,
+    // `node evalFunc.js '${req.body.code}'`,
+    `docker run eval:latest node evalFunc "${req.body.code}"`,
     (error, stdout, stderr) => {
       if (error) console.log(error)
       console.log('stdout in route@@@@@@@@:', stdout, 'END*******')
       res.send(
         stdout.split('\n').filter(i => {
           if (i.includes('mean')) return true
+          if (i.includes('solution')) return true
           if (i.includes('Winner')) return true
           if (i.includes('Compared')) return true
           if (i.includes('fast')) return true
