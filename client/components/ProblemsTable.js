@@ -1,53 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { Button, Icon, Col, Card, CardTitle, Badge } from 'react-materialize'
+
 
 const ProblemsTable = (props) => {
 
   const { problems } = props;
 
   return (
-    <table >
-      <thead>
-        <tr>
-          <th>
-            <h3>Name</h3>
-          </th>
-          <th>
-            <h3>Description</h3>
-          </th>
-          <th>
-            <h3>Difficulty</h3>
-          </th>
-          <th>
-            <h3>TRY</h3>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          problems && problems.map(problem => (
-            <tr key={problem.id}>
-              <td>
-                <strong>
-                  {problem.name}
-                  <br />
-                  <br />
-                </strong>
-              </td>
-              <td>
-                <span>{problem.description}</span>
-              </td>
-              <td>{problem.difficulty}</td>
-              <td>
-                <Link to={`/problems/${problem.id}`}>
-                  <button>TRY IT</button>
-                </Link>
-              </td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+    <div>
+      {
+        problems && problems.map(problem => (
+          <div key={problem.id}>
+            <Col m={7} s={12} >
+              <Card
+                className='blue-grey darken-1'
+                textClassName='white-text'
+                title={problem.name}
+                actions={[<Link to={`/problems/${problem.id}`} key={problem.id}>Try it</Link>,
+                ]}>
+
+                {problem.description}
+              </Card>
+
+
+            </Col>
+          </div>
+        ))
+      }
+    </div>
   );
 }
 
