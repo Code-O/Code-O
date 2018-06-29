@@ -9,22 +9,25 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
   exec(
-    // `node evalFunc.js '${req.body.code}'`,
-    `docker run eval:latest node evalFunc "${req.body.code}"`,
+    `docker run evaldock:latest node evalFunc "${req.body.code}"`,
     (error, stdout, stderr) => {
       if (error) console.log(error)
-      console.log('stdout in route@@@@@@@@:', stdout, 'END*******')
-      res.send(
-        stdout.split('\n').filter(i => {
-          if (i.includes('mean')) return true
-          if (i.includes('solution')) return true
-          if (i.includes('Winner')) return true
-          if (i.includes('Compared')) return true
-          if (i.includes('fast')) return true
+      console.log('RESULT FROM DOCKER: ', stdout)
+      let data = stdout.split('\n').filter(i => {
+        if (i.includes('mean')) return true
+        if (i.includes('solution')) return true
+        if (i.includes('Winner')) return true
+        if (i.includes('Compared')) return true
+        if (i.includes('fast')) return true
+      })
+
+      Problem.findById(req.params.id).then(prob => {
+        prob.update({
+          userSubmission: '' + [...data]
         })
-      )
+      })
     }
   )
 })
