@@ -12,10 +12,30 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: .1em;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+navbar {
+ color: blue
+}
+
+.items {
+  display: flex;
+  padding: 20px;
+}
+
+.chart {
+  width: 600px;
+  height: 600px;
+  margin-left: 300px;
+}
+
+
+.problem {
+  position: relative;
 }

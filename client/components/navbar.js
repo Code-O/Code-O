@@ -3,25 +3,34 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
-
+import { Button, Icon } from 'react-materialize'
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <h1>PairPro</h1>
-    <nav>
+    <nav >
       {isLoggedIn ? (
-        <div>
+        <div className='card-panel teal lighten-2'>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/home">
+            <Button waves='light'>Home</Button>
+          </Link>
           <a href="#" onClick={handleClick}>
-            Logout
+            <Button waves='light'>Logout</Button>
           </a>
-          <Link to="/problems">Problems</Link>
+          <Link to="/problems">
+            <Button waves='light'>Problems</Button>
+          </Link>
         </div>
       ) : (
-          <div>
+          <div className='card-panel teal lighten-2'>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/login">
+              <Button waves='light'>Login</Button>
+            </Link>
+            <Link to="/signup">
+              <Button waves='light'>Sign Up</Button>
+            </Link>
+
           </div>
         )}
     </nav>
