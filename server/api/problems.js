@@ -3,6 +3,12 @@ const {exec} = require('child_process')
 const {Problem, User} = require('../db/models')
 module.exports = router
 
+router.get('/:id', (req, res, next) => {
+  Problem.findById(req.params.id)
+    .then(problem => res.json(problem))
+    .catch(next)
+})
+
 router.get('/', (req, res, next) => {
   Problem.findAll({include: {model: User}})
     .then(problems => res.json(problems))
