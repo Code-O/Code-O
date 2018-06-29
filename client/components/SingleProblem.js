@@ -17,8 +17,7 @@ class SingleProblem extends Component {
     this.state = {
       inputCode: ''
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSumbit = this.handleSumbit.bind(this)
+
     socket.on('receive code', payload => {
       this.handleCodeUpdateFromSockets(payload)
     })
@@ -64,7 +63,7 @@ class SingleProblem extends Component {
 
 
     handleSumbit = event => {
-        event.preventDefault()
+    event.preventDefault()
     axios
       .post(`/api/problems/${this.props.problemId}`, {
         code: this.state.inputCode
@@ -86,8 +85,8 @@ class SingleProblem extends Component {
                     >
                         {singleProblem.description}
                     </Card>
-                    <form onSubmit={() => {
-                        this.handleSumbit()
+                    <form onSubmit={(e) => {
+                        this.handleSumbit(e)
                         // this.displayChart()
                     }}>
                         <button type='submit'>Submit</button>
@@ -105,7 +104,7 @@ class SingleProblem extends Component {
                             defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
                         />
                     </div>
-                    <div className="chart">
+                   <div className="chart">
                         <VictoryChart
                             animate={{
                                 duration: 2000,
