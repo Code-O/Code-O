@@ -12,17 +12,17 @@ import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis } fr
 
 
 class SingleProblem extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            inputCode: ''
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSumbit = this.handleSumbit.bind(this)
-        socket.on('receive code', (payload) => {
-            this.handleCodeUpdateFromSockets(payload)
-        })
+  constructor(props) {
+    super(props)
+    this.state = {
+      inputCode: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSumbit = this.handleSumbit.bind(this)
+    socket.on('receive code', payload => {
+      this.handleCodeUpdateFromSockets(payload)
+    })
+  }
 
 
     // componentDidMount() {
@@ -42,27 +42,34 @@ class SingleProblem extends Component {
     //     this.
     // }
 
+  // componentWillUnmount() {
+  //     socket.emit('leave room', {
+  //         room: this.props.problemId
+  //     })
+  // }
 
-    handleChange = event => {
-        this.setState({
-            inputCode: event
-        })
-        // socket.emit('coding event', {
-        //     room: this.props.problemId,
-        //     newCode: event
-        // })
-    }
+  handleChange = event => {
+    this.setState({
+      inputCode: event
+    })
+    // socket.emit('coding event', {
+    //     room: this.props.problemId,
+    //     newCode: event
+    // })
+  }
 
-    // handleCodeUpdateFromSockets(payload) {
-    //     this.setState({inputCode: payload.newCode})
-    // }
+  // handleCodeUpdateFromSockets(payload) {
+  //     this.setState({inputCode: payload.newCode})
+  // }
+
 
     handleSumbit = event => {
-        event.preventDefault();
-        console.log(this.state.inputCode)
-        axios
-            .post('/api/problems', { code: this.state.inputCode })
-            .catch(err => console.log(err))
+        event.preventDefault()
+    axios
+      .post(`/api/problems/${this.props.problemId}`, {
+        code: this.state.inputCode
+      })
+      .catch(err => console.log(err))
     }
 
     render() {
@@ -164,6 +171,7 @@ class SingleProblem extends Component {
             </div>
         )
     }
+
 }
 
 const mapStateToProps = (state, ownProps) => {
