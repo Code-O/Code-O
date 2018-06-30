@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/:id', (req, res, next) => {
   exec(
-    `docker run evaldock:latest node evalFunc "${req.body.code}"`,
+    `docker run evaldocker:latest node evalFunc "${req.body.code}"`,
     (error, stdout, stderr) => {
       if (error) console.log(error)
       console.log('RESULT FROM DOCKER: ', stdout)

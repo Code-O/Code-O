@@ -78,6 +78,7 @@ class SingleProblem extends Component {
     // const { allProblems, problemId } = this.props
     // let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
     const {singleProblem} = this.props
+    console.log('***', singleProblem.userSubmission)
     return (
       <div>
         <div className="problem">

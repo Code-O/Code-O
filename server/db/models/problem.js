@@ -24,7 +24,8 @@ const Problem = db.define('problem', {
     defaultValue: false
   },
   userSubmission: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue: ''
   },
   points: {
     type: Sequelize.INTEGER,
