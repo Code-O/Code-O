@@ -9,7 +9,7 @@ const Problem = db.define('problem', {
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: null
+    allowNull: false
   },
   difficulty: {
     type: Sequelize.ENUM('easy', 'medium', 'hard'),

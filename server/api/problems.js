@@ -33,6 +33,9 @@ router.post('/:id', (req, res, next) => {
         prob.update({
           userSubmission: '' + [...data]
         })
+        .then(updatedProblem => {
+          
+        })
       })
     }
   )
@@ -46,6 +49,8 @@ router.delete('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   Problem.findById(req.params.id)
-    .then(problem => res.json(problem))
+    .then(problem => {
+      problem.update()
+    })
     .catch(next)
 })

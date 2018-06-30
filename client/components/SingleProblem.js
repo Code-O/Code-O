@@ -15,7 +15,8 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import { fetchSingleProblem, dispatch } from '../store'
+import { fetchSingleProblem, putSingleProblem } from '../store'
+import user from '../store/user';
 
 class SingleProblem extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ class SingleProblem extends Component {
         code: this.state.inputCode
       })
       .then(postedProblem => {
-        this.props.fetchSingleProblem(postedProblem.id)
+        this.props.putSingleProblem(postedProblem.id)
       })
       .catch(err => console.log(err))
   }
@@ -80,10 +81,10 @@ class SingleProblem extends Component {
   render() {
     // const { allProblems, problemId } = this.props
     // let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
-    const { singleProblem } = this.props
-    console.log('***', singleProblem.userSubmission)
-    let userSubmission = singleProblem.userSubmission || ''
-    let filterNums = (userSubmission.match(/[+-]?\d+(\.\d+)?/g)) || ['']
+    const { singleProblem, userSubmission } = this.props
+    console.log('***userSub from Comp', userSubmission)
+    let graphUserSubmission = userSubmission || ''
+    let filterNums = (graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g)) || ['']
   
     let dataSet = filterNums.map(num => Number(num).toFixed(0)).slice(0, 4)
     // let dataSet = 10
@@ -155,20 +156,20 @@ class SingleProblem extends Component {
                 // labels={d => d.y}
                 data={[
                   {
-                    x: 20,
-                    y: smallDataSet
+                    x: xLargeDataSet,
+                    y: 20
                   },
                   {
-                    x: 100,
-                    y: medDataSet
+                    x: largeDataSet,
+                    y: 100
                   },
                   {
-                    x: 200,
-                    y: largeDataSet
+                    x: medDataSet,
+                    y: 200
                   },
                   {
-                    x: 500,
-                    y: xLargeDataSet
+                    x: smallDataSet,
+                    y: 500
                   }
                 ]}
               />
@@ -189,20 +190,20 @@ class SingleProblem extends Component {
                 // labels={(d) => d.y}
                 data={[
                   {
-                    x: 50,
-                    y: 240
+                    x: 936,
+                    y: 20
                   },
                   {
-                    x: 80,
-                    y: 400
+                    x: 2293,
+                    y: 100
                   },
                   {
-                    x: 134,
+                    x: 4411,
                     y: 200
                   },
                   {
-                    x: 75,
-                    y: 700
+                    x: 20007,
+                    y: 500
                   }
                 ]}
               />
@@ -233,15 +234,18 @@ class SingleProblem extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const problemId = Number(ownProps.match.params.id)
+  console.log('+++', state.problem.userSubmission)
   return {
     singleProblem: state.problem,
+    userSubmission: state.problem.userSubmission,
     problemId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSingleProblem: id => dispatch(fetchSingleProblem(id))
+    fetchSingleProblem: id => dispatch(fetchSingleProblem(id)),
+    putSingleProblem: id => dispatch(putSingleProblem(id))
   }
 }
 
