@@ -13,7 +13,7 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import { fetchSingleProblem, putSingleProblem } from '../store'
+import { fetchSingleProblem } from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
@@ -192,15 +192,13 @@ const mapStateToProps = (state, ownProps) => {
   const problemId = Number(ownProps.match.params.id)
   return {
     singleProblem: state.problem,
-    userSubmission: state.problem.userSubmission,
     problemId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSingleProblem: id => dispatch(fetchSingleProblem(id)),
-    putSingleProblem: id => dispatch(putSingleProblem(id))
+    fetchSingleProblem: id => dispatch(fetchSingleProblem(id))
   }
 }
 

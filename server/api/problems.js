@@ -40,17 +40,3 @@ router.post('/:id', (req, res, next) => {
     }
   )
 })
-
-router.delete('/:id', (req, res, next) => {
-  Problem.findById(req.params.id)
-    .then(problem => res.json(problem))
-    .catch(next)
-})
-
-router.put('/:id', (req, res, next) => {
-  Problem.findById(req.params.id)
-    .then(problem => {
-      problem.update()
-    })
-    .catch(next)
-})
