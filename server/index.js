@@ -106,15 +106,15 @@ const startListening = () => {
 
 var problems = [
   {
-    name: "Sum of positive",
-    description: "You get an array of numbers, return the sum of all of the positives ones.\nexample [1,-4,7,12] => 1 + 7 + 12 = 20, note: if there is nothing to sum, the sum is default to 0.",
+    name: "Pair Sum",
+    description: "Given an array of numbers sorted in ascending order (least to greatest), and a separate number (a 'sum'), determine if any 2 numbers in the array add up to the sum. Return true if any 2 different numbers within the array add up to sum. Return false if no 2 numbers in the array add up to sum. .",
     difficulty: "easy",
     tags: "arrays",
     hints: "Try array loops or method",
     solved: false,
     userSubmission: "",
     points: 1,
-    funcName: "posSum"
+    funcName: "pairSum"
   },
   {
     name: "Pizza Payments",

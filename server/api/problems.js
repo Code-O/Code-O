@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/:id', (req, res, next) => {
   exec(
-    `docker run evaldock:latest node evalFunc "${req.body.code}"`,
+    `docker run evaldocker:latest node evalFunc "${req.body.code}"`,
     (error, stdout, stderr) => {
       if (error) console.log(error)
       console.log('RESULT FROM DOCKER: ', stdout)
@@ -30,22 +30,13 @@ router.post('/:id', (req, res, next) => {
       })
 
       Problem.findById(req.params.id).then(prob => {
-        prob.update({
+        return prob.update({
           userSubmission: '' + [...data]
+        })
+        .then (updatedProblem=>{
+          res.send(updatedProblem)
         })
       })
     }
   )
-})
-
-router.delete('/:id', (req, res, next) => {
-  Problem.findById(req.params.id)
-    .then(problem => res.json(problem))
-    .catch(next)
-})
-
-router.put('/:id', (req, res, next) => {
-  Problem.findById(req.params.id)
-    .then(problem => res.json(problem))
-    .catch(next)
 })

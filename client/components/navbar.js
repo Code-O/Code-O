@@ -6,7 +6,7 @@ import { logout } from '../store'
 import { Button, Icon } from 'react-materialize'
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>PairPro</h1>
+    <h1>Code O</h1>
     <nav >
       {isLoggedIn ? (
         <div className='card-panel teal lighten-2'>
