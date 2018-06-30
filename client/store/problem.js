@@ -34,7 +34,7 @@ export const fetchSingleProblem = problemId => {
 export const putSingleProblem = problemId => {
   return dispatch => {
     axios
-      .put(`/api/problems/${problemId}`)
+      .get(`/api/problems/${problemId}`)
       .then(res => res.data)
       .then(singleProblem => {
         dispatch(updateSingleProblem(singleProblem))
@@ -45,7 +45,7 @@ export const putSingleProblem = problemId => {
 
 
 //Reducer
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case GET_SINGLE_PROBLEM: {
       return action.problem
@@ -53,9 +53,7 @@ export default function(state = [], action) {
 
     case UPDATE_SINGLE_PROBLEM: {
       console.log('from store**', action.problem.userSubmission)
-      return {...state, userSubmission:[...state.userSubmission.map(oldProblem => {
-        if(oldProblem.id === action.problem.id) return action.problem.userSubmission
-      })]}
+      return {...state, userSubmission:action.problem.userSubmission}
     }
 
     default: {

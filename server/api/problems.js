@@ -30,11 +30,11 @@ router.post('/:id', (req, res, next) => {
       })
 
       Problem.findById(req.params.id).then(prob => {
-        prob.update({
+        return prob.update({
           userSubmission: '' + [...data]
         })
-        .then(updatedProblem => {
-          
+        .then (updatedProblem=>{
+          res.send(updatedProblem)
         })
       })
     }
