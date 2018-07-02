@@ -3,11 +3,9 @@ import {Link} from 'react-router-dom'
 // import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button
 } from 'reactstrap'
 import '../styles/problemsTable.css'

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const AddForm = (props) => {
+const AddForm = () => {
 
 
     return (

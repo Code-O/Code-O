@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import {auth} from '../store'
-import {Button, Popover, PopoverHeader, PopoverBody} from 'reactstrap'
 import '../styles/signup.css'
 /**
  * COMPONENT

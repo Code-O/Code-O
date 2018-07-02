@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Button, Icon} from 'react-materialize'
+import {Button} from 'react-materialize'
 import '../styles/nav.css'
 
 const Navbar = ({handleClick, isLoggedIn}) => (

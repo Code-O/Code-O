@@ -4,16 +4,11 @@ import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import socket from '../socket'
-// import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
-  Button
 } from 'reactstrap'
 import '../styles/singleProblem.css'
 
