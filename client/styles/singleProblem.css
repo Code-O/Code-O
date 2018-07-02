@@ -22,3 +22,7 @@ navbar {
 .problem {
   position: relative;
 }
+
+#hidden-solution {
+  display: none;
+}

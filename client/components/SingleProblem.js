@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
@@ -19,16 +19,18 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import {fetchSingleProblem} from '../store'
+import { fetchSingleProblem } from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
     super(props)
     this.state = {
       inputCode: '',
-      userSubmission: ''
+      userSubmission: '',
+      hideAnswer: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleShowAnswer = this.handleShowAnswer.bind(this)
   }
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class SingleProblem extends Component {
   }
 
   handleChange = event => {
-    this.setState({inputCode: event})
+    this.setState({ inputCode: event })
   }
 
   handleSubmit = event => {
@@ -54,8 +56,15 @@ class SingleProblem extends Component {
       .catch(err => console.log(err))
   }
 
+  handleShowAnswer = () => {
+    let answer = !this.state.hideAnswer
+    this.setState({
+      hideAnswer: answer
+    })
+  }
+
   render() {
-    const {singleProblem} = this.props
+    const { singleProblem } = this.props
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
@@ -70,7 +79,7 @@ class SingleProblem extends Component {
       <div>
         <div className="problem">
           <Card>
-            <div style={{padding: '10px', margin: '0px'}}>
+            <div style={{ padding: '10px', margin: '0px' }}>
               <CardBody>
                 <CardTitle>{singleProblem.name}</CardTitle>
                 <CardText>{singleProblem.description}</CardText>
@@ -101,6 +110,21 @@ class SingleProblem extends Component {
               }}
               defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
             />
+
+            <button type='button' onClick={this.handleShowAnswer}>Show Solution</button>
+            {this.state.hideAnswer ? null :
+              (<AceEditor
+                mode="javascript"
+                theme="monokai"
+                onChange={evt => this.handleChange(evt)}
+                value={singleProblem.optimalSolution}
+                name="UNIQUE_ID_OF_DIV"
+                editorProps={{
+                  $blockScrolling: true
+                }}
+              />)
+            }
+
           </div>
           <div className="chart">
             <VictoryChart
