@@ -1,0 +1,28 @@
+.navigation {
+  color: #fff;
+  margin: 0;
+  width: 100%;
+  background: rgb(78, 101, 104);
+}
+
+.card-panel {
+  display: flex;
+  margin-top: 0;
+  background: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.card-panel h1 {
+  margin: 7px;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav a {
+  margin-left: 10px;
+}

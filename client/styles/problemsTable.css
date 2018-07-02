@@ -1,0 +1,17 @@
+.problem-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
+.problem-card {
+  background: rgb(230, 252, 249);
+}
+
+button {
+  margin: 7px;
+}
+
+button a {
+  color: #fff;
+}

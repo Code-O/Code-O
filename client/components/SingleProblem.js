@@ -6,7 +6,17 @@ import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import socket from '../socket'
-import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
+// import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from 'reactstrap'
+import '../styles/singleProblem.css'
 
 import {
   VictoryLine,
@@ -81,13 +91,21 @@ class SingleProblem extends Component {
     return (
       <div>
         <div className="problem">
-          <Card
+          <Card>
+            <div style={{padding: '10px', margin: '0px'}}>
+              <CardBody>
+                <CardTitle>{singleProblem.name}</CardTitle>
+                <CardText>{singleProblem.description}</CardText>
+              </CardBody>
+            </div>
+          </Card>
+          {/* <Card
             className="blue-grey darken-1"
             textClassName="white-text"
             title={singleProblem.name}
           >
             {singleProblem.description}
-          </Card>
+          </Card> */}
           <form
             onSubmit={e => {
               this.handleSumbit(e)
