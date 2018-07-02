@@ -111,7 +111,7 @@ class SingleProblem extends Component {
               defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
             />
 
-            <button type='button' onClick={this.handleShowAnswer}>Show Solution</button>
+            <button type='button' onClick={this.handleShowAnswer}>Show Optimal Solution</button>
             {this.state.hideAnswer ? null :
               (<AceEditor
                 mode="javascript"
