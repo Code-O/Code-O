@@ -2,7 +2,7 @@
 
 
 ## Premise
-Code-O is an educational platform that allows users to see the run time and effeciency of their solution.
+A coding platform that allows users to see the run time and effeciency of their solution for a given problem.
 
 ## Team Members
 
