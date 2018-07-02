@@ -8,7 +8,7 @@ A coding platform that allows users to see the run time and effeciency of their 
 
 - Abdul
 - Plamen
-- Thahn
+- Thanh
 - Noah 
 
 ## Main Stack
