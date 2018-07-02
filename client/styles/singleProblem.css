@@ -28,10 +28,7 @@ VictoryChart {
   position: relative;
 }
 
-
 button {
   margin-left: 20px;
-
-#hidden-solution {
-  display: none;
+}
 
