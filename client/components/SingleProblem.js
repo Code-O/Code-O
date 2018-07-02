@@ -64,14 +64,19 @@ class SingleProblem extends Component {
     let graphUserSubmission = userSubmission || ''
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
 
-    let dataSet = filterNums.map(num => Number(num).toFixed(0)).slice(0, 4)
-    let smallDataSet = dataSet[0]
-    let medDataSet = dataSet[1]
-    let largeDataSet = dataSet[2]
-    let xLargeDataSet = dataSet[3]
+    let dataSet = filterNums.map(num => Number(num))
+    console.log('userSubmission',userSubmission)
+    console.log('filterNums', filterNums)
+    console.log('***', dataSet)
+    let smallDataSet = dataSet[3] || 0
+    let medDataSet = dataSet[2] || 0
+    let largeDataSet = dataSet[1] || 0
+    let xLargeDataSet = dataSet[0] || 0
+    
+    
 
     function check() {
-      if (dataSet.length > 1 && solutionValue == 'true') {
+      if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
           <div
             style={{
@@ -100,10 +105,13 @@ class SingleProblem extends Component {
       }
     }
     let solutionValue = userSubmission
-      .split(',')[0]
-      .slice(-4)
-      .toString()
+      .split(' ')[1]
+      // .slice(-4)
+      // .toString()
+    
+    console.log('userSubmission **',userSubmission)
     console.log('work', dataSet, solutionValue)
+    
     return (
       <div>
         <div className="problem">
@@ -115,7 +123,7 @@ class SingleProblem extends Component {
               </CardBody>
             </div>
           </Card>
-          <button onSubmit={this.handleSubmit} type="submit">
+          <button onClick={this.handleSubmit} type="submit">
             Submit
           </button>
           <div className="result">{check()}</div>
@@ -175,24 +183,24 @@ class SingleProblem extends Component {
                 }}
                 data={[
                   {
-                    x: smallDataSet,
-                    y: 20
+                    x: 20,
+                    y: smallDataSet
                   },
                   {
-                    x: medDataSet,
-                    y: 100
+                    x: 100,
+                    y: medDataSet
                   },
                   {
-                    x: largeDataSet,
-                    y: 200
+                    x: 500,
+                    y: largeDataSet
                   },
                   {
-                    x: xLargeDataSet,
-                    y: 500
+                    x: 1000,
+                    y: xLargeDataSet
                   }
                 ]}
               />
-              <VictoryLine
+              {/* <VictoryLine
                 interpolation="natural"
                 style={{
                   data: {
@@ -220,9 +228,10 @@ class SingleProblem extends Component {
                     y: 500
                   }
                 ]}
-              />
+              /> */}
               <VictoryAxis
-                label="Process / ms"
+              dependentAxis
+                label="ms"
                 style={{
                   axisLabel: {
                     padding: 30
@@ -230,7 +239,7 @@ class SingleProblem extends Component {
                 }}
               />
               <VictoryAxis
-                dependentAxis
+                
                 label="Elements"
                 style={{
                   axisLabel: {

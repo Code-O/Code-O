@@ -34,11 +34,14 @@ const Problem = db.define('problem', {
   funcName: {
     type: Sequelize.STRING,
     allowNull: false,
-   validate: {
+    validate: {
      notEmpty: true
    }
   },
   optimalSolution: {
+    type: Sequelize.TEXT
+  },
+  solution: {
     type: Sequelize.TEXT
   }
 })
