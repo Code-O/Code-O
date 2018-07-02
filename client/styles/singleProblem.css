@@ -19,10 +19,19 @@ navbar {
   flex: 1;
 }
 
+VictoryChart {
+  background: blue;
+}
+
 .problem {
+  margin-top: 0;
   position: relative;
 }
 
+
+button {
+  margin-left: 20px;
+
 #hidden-solution {
   display: none;
-}
+
