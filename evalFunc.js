@@ -6,7 +6,7 @@
 //     `${myFunc.slice(
 //       myFunc.indexOf(' ') + 1,
 //       myFunc.indexOf('(')
-//     )}([2,3,10,5,8,1,4,7,9,6])`
+//     )}([1, 1, 2, 3, 4, 5], 7)`
 // )
 
 // let funcBody = myFunc.slice(myFunc.indexOf('{'), myFunc.lastIndexOf('}') + 1)
@@ -24,22 +24,22 @@
 // }
 
 // let small = generateData(20)
-// let med = generateData(1000)
-// let large = generateData(5000)
-// let xl = generateData(10000)
+// let med = generateData(100)
+// let large = generateData(200)
+// let xl = generateData(500)
 
 // exports.compare = {
 //   'small sample': function() {
-//     myFuncCall(small)
+//     myFuncCall(small,2000)
 //   },
 //   'med sample': function() {
-//     myFuncCall(med)
+//     myFuncCall(med,2000)
 //   },
 //   'large sample': function() {
-//     myFuncCall(large)
+//     myFuncCall(large,2000)
 //   },
 //   'xl sample': function() {
-//     myFuncCall(xl)
+//     myFuncCall(xl,2000)
 //   }
 // }
 // require('bench').runMain()

@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import brace from 'brace'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
+
 import socket from '../socket'
-// import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
+
 import {
   Card,
   CardImg,
@@ -18,6 +18,8 @@ import {
 } from 'reactstrap'
 import '../styles/singleProblem.css'
 
+
+
 import {
   VictoryLine,
   VictoryChart,
@@ -25,69 +27,54 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import {fetchSingleProblem} from '../store'
+import { fetchSingleProblem } from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputCode: ''
+      inputCode: '',
+      userSubmission: ''
     }
-
-    socket.on('receive code', payload => {
-      this.handleCodeUpdateFromSockets(payload)
-    })
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    // socket.emit('room', {room: this.props.problemId})
     this.props.fetchSingleProblem(this.props.problemId)
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //     socket.emit('room', {room: nextProps.problemId})
-  // }
-
-  // componentWillUnmount() {
-  //     socket.emit('leave room', {
-  //         room: this.props.problemId
-  //     })
-  // }
-  // displayChart = () => {
-  //     this.
-  // }
-
-  // componentWillUnmount() {
-  //     socket.emit('leave room', {
-  //         room: this.props.problemId
-  //     })
-  // }
-
   handleChange = event => {
-    this.setState({inputCode: event})
-    // socket.emit('coding event', {
-    //     room: this.props.problemId,
-    //     newCode: event
-    // })
+    this.setState({ inputCode: event })
+
   }
 
-  // handleCodeUpdateFromSockets(payload) {
-  //     this.setState({inputCode: payload.newCode})
-  // }
-
-  handleSumbit = event => {
+  handleSubmit = event => {
     event.preventDefault()
     axios
       .post(`/api/problems/${this.props.problemId}`, {
         code: this.state.inputCode
       })
+      .then(res=>res.data)
+      .then(problem=>{
+        this.setState({
+          userSubmission: problem.userSubmission
+        })
+      })
       .catch(err => console.log(err))
   }
 
   render() {
-    // const { allProblems, problemId } = this.props
-    // let singleProblem = allProblems.filter(problem => problem.id === problemId)[0] || ''
-    const {singleProblem} = this.props
+    const { singleProblem } = this.props
+    const userSubmission = this.state.userSubmission
+    let graphUserSubmission = userSubmission || ''
+    let filterNums = (graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g)) || ['']
+  
+    let dataSet = filterNums.map(num => Number(num).toFixed(0)).slice(0, 4)
+    let smallDataSet = dataSet[0]
+    let medDataSet = dataSet[1]
+    let largeDataSet = dataSet[2]
+    let xLargeDataSet = dataSet[3]
+
     return (
       <div>
         <div className="problem">
@@ -107,10 +94,7 @@ class SingleProblem extends Component {
             {singleProblem.description}
           </Card> */}
           <form
-            onSubmit={e => {
-              this.handleSumbit(e)
-              // this.displayChart()
-            }}
+            onSubmit={this.handleSubmit}
           >
             <button type="submit">Submit</button>
           </form>
@@ -120,7 +104,7 @@ class SingleProblem extends Component {
             <AceEditor
               mode="javascript"
               theme="monokai"
-              onChange={this.handleChange}
+              onChange={(evt) => this.handleChange(evt)}
               value={this.state.inputCode}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{
@@ -153,24 +137,22 @@ class SingleProblem extends Component {
                     fontSize: 15
                   }
                 }}
-                // labels={(d) => d.x}
-                // labels={d => d.y}
                 data={[
                   {
-                    x: 124,
-                    y: 112
+                    x: xLargeDataSet,
+                    y: 20
                   },
                   {
-                    x: 186,
-                    y: 345
+                    x: largeDataSet,
+                    y: 100
                   },
                   {
-                    x: 243,
-                    y: 154
+                    x: medDataSet,
+                    y: 200
                   },
                   {
-                    x: 540,
-                    y: 45
+                    x: smallDataSet,
+                    y: 500
                   }
                 ]}
               />
@@ -183,28 +165,23 @@ class SingleProblem extends Component {
                   parent: {
                     border: '1px solid #ccc'
                   }
-                  // labels: {
-                  //     fontSize: 15
-                  //   },,,
                 }}
-                // labels={(d) => d.x}
-                // labels={(d) => d.y}
                 data={[
                   {
-                    x: 50,
-                    y: 240
+                    x: 936,
+                    y: 20
                   },
                   {
-                    x: 80,
-                    y: 400
+                    x: 2293,
+                    y: 100
                   },
                   {
-                    x: 134,
+                    x: 4411,
                     y: 200
                   },
                   {
-                    x: 75,
-                    y: 700
+                    x: 20007,
+                    y: 500
                   }
                 ]}
               />

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
@@ -10,9 +11,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navigation">
     {isLoggedIn ? (
       <div className="card-panel midnightblue lighten-1">
-        <h1>PairPro</h1>
+         <h1>Code-O</h1>
         {/* The navbar will show these links after you log in */}
         <div className="nav">
+
           <Link to="/home">
             <Button waves="light">Home</Button>
           </Link>
