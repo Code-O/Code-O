@@ -8,6 +8,7 @@ import App from './app'
 
 // establishes socket connection
 import './socket'
+import './styles/index.css'
 
 ReactDOM.render(
   <Provider store={store}>

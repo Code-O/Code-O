@@ -1,0 +1,35 @@
+body {
+  background: #1abc9c;
+}
+
+.container {
+  width: 400px;
+  height: 450px;
+  margin: 0 auto;
+  background: rgb(88, 107, 120, 0.9);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transform: translateY(30%);
+}
+
+.container a {
+  margin-top: 7px;
+  color: skyblue;
+}
+
+.img {
+  background: url('https://i.pinimg.com/originals/0f/8b/28/0f8b2870896edcde8f6149fe2733faaf.jpg');
+  background-position: center;
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+Popover {
+  border: 2px solid blue;
+}

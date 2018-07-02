@@ -4,7 +4,21 @@ import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import { Card } from 'react-materialize'
+
+import socket from '../socket'
+
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from 'reactstrap'
+import '../styles/singleProblem.css'
+
+
 
 import {
   VictoryLine,
@@ -64,13 +78,21 @@ class SingleProblem extends Component {
     return (
       <div>
         <div className="problem">
-          <Card
+          <Card>
+            <div style={{padding: '10px', margin: '0px'}}>
+              <CardBody>
+                <CardTitle>{singleProblem.name}</CardTitle>
+                <CardText>{singleProblem.description}</CardText>
+              </CardBody>
+            </div>
+          </Card>
+          {/* <Card
             className="blue-grey darken-1"
             textClassName="white-text"
             title={singleProblem.name}
           >
             {singleProblem.description}
-          </Card>
+          </Card> */}
           <form
             onSubmit={this.handleSubmit}
           >

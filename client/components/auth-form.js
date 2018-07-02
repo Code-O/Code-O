@@ -1,24 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 import {auth} from '../store'
-
+import {Button, Popover, PopoverHeader, PopoverBody} from 'reactstrap'
+import '../styles/signup.css'
 /**
  * COMPONENT
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  console.log(props)
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit} name={name}>
-        <div>
+        <div className="user-input">
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" />
         </div>
-        <div>
+        <div className="user-input">
           <label htmlFor="password">
             <small>Password</small>
           </label>
@@ -29,7 +32,11 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+
+      <span className="img" />
+      <h1>PairPro</h1>
       <a href="/auth/google">{displayName} with Google</a>
+      <Link to="/signup">- Sign Up -</Link>
     </div>
   )
 }
