@@ -37,6 +37,9 @@ const Problem = db.define('problem', {
    validate: {
      notEmpty: true
    }
+  },
+  optimalSolution: {
+    type: Sequelize.TEXT
   }
 })
 
