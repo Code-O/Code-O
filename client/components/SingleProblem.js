@@ -4,12 +4,7 @@ import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-} from 'reactstrap'
+import {Card, CardText, CardBody, CardTitle} from 'reactstrap'
 import '../styles/singleProblem.css'
 
 import {
@@ -66,6 +61,40 @@ class SingleProblem extends Component {
     let largeDataSet = dataSet[2]
     let xLargeDataSet = dataSet[3]
 
+    function check() {
+      if (dataSet.length > 1 && solutionValue == 'true') {
+        return (
+          <div
+            style={{
+              background: '#fff',
+              padding: '7px',
+              textAlign: 'center'
+            }}
+          >
+            Success!!
+          </div>
+        )
+      } else if (dataSet.length > 1) {
+        return (
+          <div
+            style={{
+              background: '#fff',
+              padding: '7px',
+              textAlign: 'center'
+            }}
+          >
+            Too Bad!!
+          </div>
+        )
+      } else {
+        return <div />
+      }
+    }
+    let solutionValue = userSubmission
+      .split(',')[0]
+      .slice(-4)
+      .toString()
+    console.log('work', dataSet, solutionValue)
     return (
       <div>
         <div className="problem">
@@ -77,16 +106,10 @@ class SingleProblem extends Component {
               </CardBody>
             </div>
           </Card>
-          {/* <Card
-            className="blue-grey darken-1"
-            textClassName="white-text"
-            title={singleProblem.name}
-          >
-            {singleProblem.description}
-          </Card> */}
-          <form onSubmit={this.handleSubmit}>
-            <button type="submit">Submit</button>
-          </form>
+          <button onSubmit={this.handleSubmit} type="submit">
+            Submit
+          </button>
+          <div className="result">{check()}</div>
         </div>
         <div className="items">
           <div className="editor">
