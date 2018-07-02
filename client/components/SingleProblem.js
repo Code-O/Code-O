@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-
 import socket from '../socket'
-
+// import {Button, Icon, Col, Card, CardTitle, Badge} from 'react-materialize'
 import {
   Card,
   CardImg,
@@ -18,8 +17,6 @@ import {
 } from 'reactstrap'
 import '../styles/singleProblem.css'
 
-
-
 import {
   VictoryLine,
   VictoryChart,
@@ -27,7 +24,7 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import { fetchSingleProblem } from '../store'
+import {fetchSingleProblem} from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
@@ -44,8 +41,7 @@ class SingleProblem extends Component {
   }
 
   handleChange = event => {
-    this.setState({ inputCode: event })
-
+    this.setState({inputCode: event})
   }
 
   handleSubmit = event => {
@@ -54,8 +50,8 @@ class SingleProblem extends Component {
       .post(`/api/problems/${this.props.problemId}`, {
         code: this.state.inputCode
       })
-      .then(res=>res.data)
-      .then(problem=>{
+      .then(res => res.data)
+      .then(problem => {
         this.setState({
           userSubmission: problem.userSubmission
         })
@@ -64,11 +60,11 @@ class SingleProblem extends Component {
   }
 
   render() {
-    const { singleProblem } = this.props
+    const {singleProblem} = this.props
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
-    let filterNums = (graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g)) || ['']
-  
+    let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
+
     let dataSet = filterNums.map(num => Number(num).toFixed(0)).slice(0, 4)
     let smallDataSet = dataSet[0]
     let medDataSet = dataSet[1]
@@ -93,9 +89,7 @@ class SingleProblem extends Component {
           >
             {singleProblem.description}
           </Card> */}
-          <form
-            onSubmit={this.handleSubmit}
-          >
+          <form onSubmit={this.handleSubmit}>
             <button type="submit">Submit</button>
           </form>
         </div>
@@ -104,7 +98,7 @@ class SingleProblem extends Component {
             <AceEditor
               mode="javascript"
               theme="monokai"
-              onChange={(evt) => this.handleChange(evt)}
+              onChange={evt => this.handleChange(evt)}
               value={this.state.inputCode}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{
@@ -123,7 +117,7 @@ class SingleProblem extends Component {
               }}
               theme={VictoryTheme.material}
             >
-              <VictoryLabel x={130} y={30} text="Big O Complexity" />
+              <VictoryLabel x={130} y={30} text="Big time Complexity" />
               <VictoryLine
                 interpolation="natural"
                 style={{
@@ -139,19 +133,19 @@ class SingleProblem extends Component {
                 }}
                 data={[
                   {
-                    x: xLargeDataSet,
+                    x: smallDataSet,
                     y: 20
                   },
                   {
-                    x: largeDataSet,
+                    x: medDataSet,
                     y: 100
                   },
                   {
-                    x: medDataSet,
+                    x: largeDataSet,
                     y: 200
                   },
                   {
-                    x: smallDataSet,
+                    x: xLargeDataSet,
                     y: 500
                   }
                 ]}
@@ -168,25 +162,25 @@ class SingleProblem extends Component {
                 }}
                 data={[
                   {
-                    x: 936,
+                    x: 20007,
                     y: 20
                   },
                   {
-                    x: 2293,
+                    x: 4411,
                     y: 100
                   },
                   {
-                    x: 4411,
+                    x: 2293,
                     y: 200
                   },
                   {
-                    x: 20007,
+                    x: 936,
                     y: 500
                   }
                 ]}
               />
               <VictoryAxis
-                label="Elements"
+                label="Process / ms"
                 style={{
                   axisLabel: {
                     padding: 30
@@ -195,7 +189,7 @@ class SingleProblem extends Component {
               />
               <VictoryAxis
                 dependentAxis
-                label="Operations"
+                label="Elements"
                 style={{
                   axisLabel: {
                     padding: 40
