@@ -1,6 +1,6 @@
 # Code-O 
 
-<img align="center" width="150" height="178"
+<img align="center" width="165" height="178"
      title="Size Limit logo" src="./public/favicon.ico">
 
 ## Introduction
@@ -37,5 +37,5 @@ $ npm run start-dev
 
 ## Screenshot
 
-<img align="center" width="450" height="534"
+<img align="center" width="500" height="534"
      title="Screen Shot" src="./public/App-Screen-Shot.png">
