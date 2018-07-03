@@ -53,6 +53,7 @@
     "prop-types": "^15.5.8",
     "react": "^16.3.1",
     "react-ace": "^6.1.1",
+    "react-css-loaders": "0.0.5",
     "react-dom": "^16.0.0",
     "react-materialize": "^2.3.2",
     "react-redux": "^5.0.2",
