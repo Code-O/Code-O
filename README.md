@@ -4,11 +4,8 @@
      title="Size Limit logo" src="./public/favicon.ico">
 
 ## Introduction
-A coding platform that allows users to test the run time and effeciency of their solution for a given problem.
 
-
-
-Code-O is a coding platform where you can perform coding challenges and test the time complexity of your code. It is built using Node/Express, Sequelize, and Docker on the Back-end and React, Redux, and Victory (data visualization) on the Front-End. This application uses Docker to build a container where the user's input code is evaluated. The data is inputted into Victory to create a nice visualization of the data. Click the "Show Optimal Solution" to see how your solution compares to the most optimal solution.
+Code-O is a coding platform where you can perform coding challenges and test the time complexity of your code. It is built using Node/Express, Sequelize, and Docker on the Back-end and React, Redux, and Victory (data visualization) on the Front-End. The user's input code is evaluated inside a Docker container for security purposes. The data is inputted into Victory to create a nice visualization of the data. Click the "Show Optimal Solution" button to see how your solution compares to the most optimal solution.
 
 Visit us at: http://code-o.herokuapp.com/
 
