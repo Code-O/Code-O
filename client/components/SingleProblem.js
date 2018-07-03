@@ -6,6 +6,7 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import { Card, CardText, CardBody, CardTitle } from 'reactstrap'
 import '../styles/singleProblem.css'
+import { CylinderSpinLoader } from 'react-css-loaders'
 
 import {
   VictoryLine,
@@ -22,7 +23,8 @@ class SingleProblem extends Component {
     this.state = {
       inputCode: '',
       userSubmission: '',
-      hideAnswer: true
+      hideAnswer: true,
+      showLoader: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleShowAnswer = this.handleShowAnswer.bind(this)
@@ -38,6 +40,9 @@ class SingleProblem extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    this.setState({
+      showLoader: true
+    })
     axios
       .post(`/api/problems/${this.props.problemId}`, {
         code: this.state.inputCode
@@ -45,7 +50,8 @@ class SingleProblem extends Component {
       .then(res => res.data)
       .then(problem => {
         this.setState({
-          userSubmission: problem.userSubmission
+          userSubmission: problem.userSubmission,
+          showLoader: false
         })
       })
       .catch(err => console.log(err))
@@ -76,9 +82,6 @@ class SingleProblem extends Component {
       .split(' ')[1] || ''
     let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
 
-    console.log("1-solutionValue: ", solutionValue.length)
-    console.log("2-singleProblem.solution: ", singleProblem.solution)
-    console.log("3-dataSet: ", dataSet)
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -101,7 +104,7 @@ class SingleProblem extends Component {
               textAlign: 'center'
             }}
           >
-            Too Bad!!
+            Sorry, please try again!!
           </div>
         )
       } else {
@@ -120,9 +123,10 @@ class SingleProblem extends Component {
               </CardBody>
             </div>
           </Card>
-          <button onClick={this.handleSubmit} type="submit">
+          <button onClick={this.handleSubmit} disable={this.state.showLoader}type="submit">
             Submit
           </button>
+          {this.state.showLoader ? (< CylinderSpinLoader />) : null}
           <div className="result">{check()}</div>
         </div>
         <div className="items">
