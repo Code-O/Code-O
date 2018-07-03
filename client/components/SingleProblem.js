@@ -69,11 +69,7 @@ class SingleProblem extends Component {
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
-
     let dataSet = filterNums.map(num => Number(num))
-    // console.log('userSubmission', userSubmission)
-    // console.log('filterNums', filterNums)
-    // console.log('***', dataSet)
     let smallDataSet = dataSet[3] || 0
     let medDataSet = dataSet[2] || 0
     let largeDataSet = dataSet[1] || 0
@@ -81,7 +77,7 @@ class SingleProblem extends Component {
     let returnVal = userSubmission
       .split(' ')[1] || ''
     let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
-
+    
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -123,7 +119,7 @@ class SingleProblem extends Component {
               </CardBody>
             </div>
           </Card>
-          <button onClick={this.handleSubmit} disable={this.state.showLoader}type="submit">
+          <button onClick={this.handleSubmit} type="submit">
             Submit
           </button>
           {this.state.showLoader ? (< CylinderSpinLoader />) : null}
@@ -168,7 +164,7 @@ class SingleProblem extends Component {
               }}
               theme={VictoryTheme.material}
             >
-              <VictoryLabel x={130} y={30} text="Big time Complexity" />
+              <VictoryLabel x={130} y={30} text="Time Complexity" />
               <VictoryLine
                 interpolation="natural"
                 style={{
@@ -193,7 +189,7 @@ class SingleProblem extends Component {
                   },
                   {
                     x: 500,
-                    y: largeDataSet
+                    y:  largeDataSet
                   },
                   {
                     x: 1000,
@@ -206,7 +202,7 @@ class SingleProblem extends Component {
                 label="ms"
                 style={{
                   axisLabel: {
-                    padding: 30
+                    padding: 40
                   }
                 }}
               />
@@ -215,7 +211,7 @@ class SingleProblem extends Component {
                 label="Elements"
                 style={{
                   axisLabel: {
-                    padding: 40
+                    padding: 30
                   }
                 }}
               />
