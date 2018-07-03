@@ -18,7 +18,7 @@ Visit us at: http://code-o.herokuapp.com/
 
 ## Technologies
 
-- Node/Express: Backend
+- Node/Express: Server
 - React: Frontend Framework
 - Postgres & Sequelize: Database & ORM
 - Redux: State Management
