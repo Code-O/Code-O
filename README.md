@@ -37,5 +37,5 @@ $ npm run start-dev
 
 ## Screenshot
 
-<img align="center" width="500" height="534"
+<img align="center" width="800" height="534"
      title="Screen Shot" src="./public/App-Screen-Shot.png">
