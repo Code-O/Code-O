@@ -4,7 +4,7 @@ import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import {Card, CardText, CardBody, CardTitle} from 'reactstrap'
+import { Card, CardText, CardBody, CardTitle } from 'reactstrap'
 import '../styles/singleProblem.css'
 
 import {
@@ -65,16 +65,20 @@ class SingleProblem extends Component {
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
 
     let dataSet = filterNums.map(num => Number(num))
-    console.log('userSubmission',userSubmission)
-    console.log('filterNums', filterNums)
-    console.log('***', dataSet)
+    // console.log('userSubmission', userSubmission)
+    // console.log('filterNums', filterNums)
+    // console.log('***', dataSet)
     let smallDataSet = dataSet[3] || 0
     let medDataSet = dataSet[2] || 0
     let largeDataSet = dataSet[1] || 0
     let xLargeDataSet = dataSet[0] || 0
-    
-    
+    let returnVal = userSubmission
+      .split(' ')[1] || ''
+    let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
 
+    console.log("1-solutionValue: ", solutionValue.length)
+    console.log("2-singleProblem.solution: ", singleProblem.solution)
+    console.log("3-dataSet: ", dataSet)
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -104,14 +108,7 @@ class SingleProblem extends Component {
         return <div />
       }
     }
-    let solutionValue = userSubmission
-      .split(' ')[1]
-      // .slice(-4)
-      // .toString()
-    
-    console.log('userSubmission **',userSubmission)
-    console.log('work', dataSet, solutionValue)
-    
+
     return (
       <div>
         <div className="problem">
@@ -200,37 +197,8 @@ class SingleProblem extends Component {
                   }
                 ]}
               />
-              {/* <VictoryLine
-                interpolation="natural"
-                style={{
-                  data: {
-                    stroke: 'blue'
-                  },
-                  parent: {
-                    border: '1px solid #ccc'
-                  }
-                }}
-                data={[
-                  {
-                    x: 20007,
-                    y: 20
-                  },
-                  {
-                    x: 4411,
-                    y: 100
-                  },
-                  {
-                    x: 2293,
-                    y: 200
-                  },
-                  {
-                    x: 936,
-                    y: 500
-                  }
-                ]}
-              /> */}
               <VictoryAxis
-              dependentAxis
+                dependentAxis
                 label="ms"
                 style={{
                   axisLabel: {
@@ -239,7 +207,7 @@ class SingleProblem extends Component {
                 }}
               />
               <VictoryAxis
-                
+
                 label="Elements"
                 style={{
                   axisLabel: {
