@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import { Card, CardText, CardBody, CardTitle } from 'reactstrap'
+import {Card, CardText, CardBody, CardTitle} from 'reactstrap'
 import '../styles/singleProblem.css'
-import { CylinderSpinLoader } from 'react-css-loaders'
+import {CylinderSpinLoader} from 'react-css-loaders'
 
 import {
   VictoryLine,
@@ -15,7 +15,7 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import { fetchSingleProblem } from '../store'
+import {fetchSingleProblem} from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
@@ -35,23 +35,21 @@ class SingleProblem extends Component {
   }
 
   handleChange = event => {
-    this.setState({ inputCode: event })
+    this.setState({inputCode: event})
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    this.setState({
-      showLoader: true
-    })
+    console.log(this.state.inputCode, 'input')
     axios
-      .post(`/api/problems/${this.props.problemId}`, {
+      .post('https://code-o-test.herokuapp.com/secApp', {
         code: this.state.inputCode
       })
       .then(res => res.data)
       .then(problem => {
+        console.log(problem, '<- from docker')
         this.setState({
-          userSubmission: problem.userSubmission,
-          showLoader: false
+          userSubmission: problem
         })
       })
       .catch(err => console.log(err))
@@ -65,19 +63,18 @@ class SingleProblem extends Component {
   }
 
   render() {
-    const { singleProblem } = this.props
+    const {singleProblem} = this.props
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
     let dataSet = filterNums.map(num => Number(num))
-    let smallDataSet = dataSet[3] || 0
-    let medDataSet = dataSet[2] || 0
-    let largeDataSet = dataSet[1] || 0
-    let xLargeDataSet = dataSet[0] || 0
-    let returnVal = userSubmission
-      .split(' ')[1] || ''
+    let smallDataSet = dataSet[0] || 0
+    let medDataSet = dataSet[1] || 0
+    let largeDataSet = dataSet[2] || 0
+    let xLargeDataSet = dataSet[3] || 0
+    let returnVal = userSubmission.split(' ')[1] || ''
     let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
-    
+
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -112,7 +109,7 @@ class SingleProblem extends Component {
       <div>
         <div className="problem">
           <Card>
-            <div style={{ padding: '10px', margin: '0px' }}>
+            <div style={{padding: '10px', margin: '0px'}}>
               <CardBody>
                 <CardTitle>{singleProblem.name}</CardTitle>
                 <CardText>{singleProblem.description}</CardText>
@@ -122,7 +119,7 @@ class SingleProblem extends Component {
           <button onClick={this.handleSubmit} type="submit">
             Submit
           </button>
-          {this.state.showLoader ? (< CylinderSpinLoader />) : null}
+          {this.state.showLoader ? <CylinderSpinLoader /> : null}
           <div className="result">{check()}</div>
         </div>
         <div className="items">
@@ -139,9 +136,11 @@ class SingleProblem extends Component {
               defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
             />
 
-            <button type='button' onClick={this.handleShowAnswer}>Show Optimal Solution</button>
-            {this.state.hideAnswer ? null :
-              (<AceEditor
+            <button type="button" onClick={this.handleShowAnswer}>
+              Show Optimal Solution
+            </button>
+            {this.state.hideAnswer ? null : (
+              <AceEditor
                 mode="javascript"
                 theme="monokai"
                 onChange={evt => this.handleChange(evt)}
@@ -150,9 +149,8 @@ class SingleProblem extends Component {
                 editorProps={{
                   $blockScrolling: true
                 }}
-              />)
-            }
-
+              />
+            )}
           </div>
           <div className="chart">
             <VictoryChart
@@ -189,7 +187,7 @@ class SingleProblem extends Component {
                   },
                   {
                     x: 500,
-                    y:  largeDataSet
+                    y: largeDataSet
                   },
                   {
                     x: 1000,
@@ -207,7 +205,6 @@ class SingleProblem extends Component {
                 }}
               />
               <VictoryAxis
-
                 label="Elements"
                 style={{
                   axisLabel: {
