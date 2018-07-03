@@ -115,6 +115,7 @@ var problems = [
     userSubmission: "",
     points: 1,
     funcName: "pairSum",
+    solution: 'true',
     optimalSolution: "function pairSum(arr, target) {\n  var leftIdx = 0, rightIdx = arr.length - 1;\n\n   if (arr.length < 2) return false;\n\n   while (leftIdx !== rightIdx) {\n     var currSum = arr[leftIdx] + arr[rightIdx];\n\n     if (currSum === target) return true;\n     else if (currSum < target) leftIdx++;\n     else rightIdx--;\n   }\n\n     return false\n}"
   },
   {
