@@ -68,10 +68,11 @@ class SingleProblem extends Component {
     let graphUserSubmission = userSubmission || ''
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
     let dataSet = filterNums.map(num => Number(num))
-    let smallDataSet = dataSet[0] || 0
-    let medDataSet = dataSet[1] || 0
-    let largeDataSet = dataSet[2] || 0
-    let xLargeDataSet = dataSet[3] || 0
+    let smallDataSet = dataSet[5] || 0
+    let medDataSet = dataSet[4] || 0
+    let largeDataSet = dataSet[3] || 0
+    let xLargeDataSet = dataSet[2] || 0
+     
     let returnVal = userSubmission.split(' ')[1] || ''
     let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
 
