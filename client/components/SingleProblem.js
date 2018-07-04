@@ -66,6 +66,8 @@ class SingleProblem extends Component {
     const {singleProblem} = this.props
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
+
+    // Sets the data set values into its various data set sizes
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
     let dataSet = filterNums.map(num => Number(num))
     let smallDataSet = dataSet[5] || 0
@@ -73,14 +75,12 @@ class SingleProblem extends Component {
     let largeDataSet = dataSet[3] || 0
     let xLargeDataSet = dataSet[2] || 0
      
+    //Sets the users solution value from the stdpout from the docker container
     let returnVal = userSubmission.split('solution')[1] || ''
     let solutionValueArr = returnVal.match('true') || ''
     let solutionValue =  solutionValueArr[0]
-    console.log('Data set', dataSet)
-    console.log('returnVal=>:',returnVal)
-    // console.log('index: ',returnVal.indexOf('solution')+9)
-    console.log('User SOlution???', solutionValue)
-    
+
+    // Checks if the user's solution is correct or wrong
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -203,6 +203,7 @@ class SingleProblem extends Component {
               />
               <VictoryAxis
                 dependentAxis
+                domain={[0, 7]}
                 label="ms"
                 style={{
                   axisLabel: {
