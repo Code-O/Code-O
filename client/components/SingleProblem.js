@@ -42,7 +42,7 @@ class SingleProblem extends Component {
     event.preventDefault()
     console.log(this.state.inputCode, 'input')
     axios
-      .post('https://code-o-test.herokuapp.com/secApp', {
+      .post('https://code-o-local.herokuapp.com/secApp', {
         code: this.state.inputCode
       })
       .then(res => res.data)
@@ -73,9 +73,14 @@ class SingleProblem extends Component {
     let largeDataSet = dataSet[3] || 0
     let xLargeDataSet = dataSet[2] || 0
      
-    let returnVal = userSubmission.split(' ')[1] || ''
-    let solutionValue = returnVal.slice(0, returnVal.indexOf('m') - 1)
-
+    let returnVal = userSubmission.split('solution')[1] || ''
+    let solutionValueArr = returnVal.match('true') || ''
+    let solutionValue =  solutionValueArr[0]
+    console.log('Data set', dataSet)
+    console.log('returnVal=>:',returnVal)
+    // console.log('index: ',returnVal.indexOf('solution')+9)
+    console.log('User SOlution???', solutionValue)
+    
     function check() {
       if (dataSet.length > 1 && solutionValue === singleProblem.solution) {
         return (
@@ -89,7 +94,7 @@ class SingleProblem extends Component {
             Success!!
           </div>
         )
-      } else if (dataSet.length > 1) {
+      } else if (dataSet.length > 1 && solutionValue !== singleProblem.solution) {
         return (
           <div
             style={{
