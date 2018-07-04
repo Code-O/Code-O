@@ -18,22 +18,6 @@ const ProblemsTable = props => {
       {problems &&
         problems.map(problem => (
           <div className="problem-card" key={problem.id}>
-            {/* <Col m={7} s={12}>
-              <Card
-                horizontal="true"
-                className="blue-grey darken-1"
-                textClassName="white-text"
-                title={problem.name}
-                actions={[
-                  <Link to={`/problems/${problem.id}`} key={problem.id}>
-                    Try it
-                  </Link>
-                ]}
-              >
-                {problem.description}
-              </Card>
-            </Col>
-             */}
             <Card>
               <div style={{padding: '10px'}}>
                 <CardBody>

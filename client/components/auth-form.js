@@ -8,7 +8,6 @@ import '../styles/signup.css'
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
   console.log(props)
 
   return (
