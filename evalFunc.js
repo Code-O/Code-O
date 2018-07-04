@@ -28,21 +28,6 @@ let med = generateData(100)
 let large = generateData(500)
 let xl = generateData(1000)
 
-// exports.compare = {
-//   'small sample': function() {
-//     myFuncCall(small,2000)
-//   },
-//   'med sample': function() {
-//     myFuncCall(med,2000)
-//   },
-//   'large sample': function() {
-//     myFuncCall(large,2000)
-//   },
-//   'xl sample': function() {
-//     myFuncCall(xl,2000)
-//   }
-// }
-// require('bench').runMain()
 console.log('solution', userValue)
 
 
