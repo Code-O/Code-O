@@ -77,8 +77,8 @@ class SingleProblem extends Component {
      
     //Sets the users solution value from the stdpout from the docker container
     let returnVal = userSubmission.split('solution')[1] || ''
-    let solutionValueArr = returnVal.match('true') || ''
-    let solutionValue =  solutionValueArr[0]
+    let solutionValueStr = returnVal.split(' ')[1] || ''
+    let solutionValue =  solutionValueStr.slice(0, solutionValueStr.indexOf('m')-1)
 
     // Checks if the user's solution is correct or wrong
     function check() {
