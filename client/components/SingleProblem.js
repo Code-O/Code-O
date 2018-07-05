@@ -40,6 +40,7 @@ class SingleProblem extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    this.setState({showLoader:true})
     console.log(this.state.inputCode, 'input')
     axios
       .post('https://code-o-test.herokuapp.com/secApp', {
@@ -49,7 +50,8 @@ class SingleProblem extends Component {
       .then(problem => {
         console.log(problem, '<- from docker')
         this.setState({
-          userSubmission: problem
+          userSubmission: problem,
+          showLoader:false
         })
       })
       .catch(err => console.log(err))
