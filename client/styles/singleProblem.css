@@ -28,7 +28,7 @@ VictoryChart {
   position: relative;
 }
 
-button {
-  margin-left: 20px;
+button:hover {
+  background-color: bisque;
 }
 
