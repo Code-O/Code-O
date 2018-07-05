@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import {Card, CardText, CardBody, CardTitle} from 'reactstrap'
+import { Card, CardText, CardBody, CardTitle } from 'reactstrap'
 import '../styles/singleProblem.css'
-import {CylinderSpinLoader} from 'react-css-loaders'
+import { CylinderSpinLoader } from 'react-css-loaders'
 
 import {
   VictoryLine,
@@ -15,7 +15,7 @@ import {
   VictoryLabel,
   VictoryAxis
 } from 'victory'
-import {fetchSingleProblem} from '../store'
+import { fetchSingleProblem } from '../store'
 
 class SingleProblem extends Component {
   constructor(props) {
@@ -35,12 +35,12 @@ class SingleProblem extends Component {
   }
 
   handleChange = event => {
-    this.setState({inputCode: event})
+    this.setState({ inputCode: event })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    this.setState({showLoader:true})
+    this.setState({ showLoader: true })
     console.log(this.state.inputCode, 'input')
     axios
       .post('https://code-o-test.herokuapp.com/secApp', {
@@ -51,7 +51,7 @@ class SingleProblem extends Component {
         console.log(problem, '<- from docker')
         this.setState({
           userSubmission: problem,
-          showLoader:false
+          showLoader: false
         })
       })
       .catch(err => console.log(err))
@@ -65,7 +65,7 @@ class SingleProblem extends Component {
   }
 
   render() {
-    const {singleProblem} = this.props
+    const { singleProblem } = this.props
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
 
@@ -76,11 +76,11 @@ class SingleProblem extends Component {
     let medDataSet = dataSet[4] || 0
     let largeDataSet = dataSet[3] || 0
     let xLargeDataSet = dataSet[2] || 0
-     
+
     //Sets the users solution value from the stdpout from the docker container
     let returnVal = userSubmission.split('solution')[1] || ''
     let solutionValueStr = returnVal.split(' ')[1] || ''
-    let solutionValue =  solutionValueStr.slice(0, solutionValueStr.indexOf('m')-1)
+    let solutionValue = solutionValueStr.slice(0, solutionValueStr.indexOf('m') - 1)
 
     // Checks if the user's solution is correct or wrong
     function check() {
@@ -90,7 +90,11 @@ class SingleProblem extends Component {
             style={{
               background: '#fff',
               padding: '7px',
-              textAlign: 'center'
+              textAlign: 'center',
+              width: '600px',
+              backgroundColor: ' #00a8ff',
+              margin: '0 auto',
+              fontSize: '1.7em'
             }}
           >
             Success!!
@@ -102,7 +106,11 @@ class SingleProblem extends Component {
             style={{
               background: '#fff',
               padding: '7px',
-              textAlign: 'center'
+              textAlign: 'center',
+              width: '600px',
+              backgroundColor: '#e84118',
+              margin: '0 auto',
+              fontSize: '1.7em'
             }}
           >
             Sorry, please try again!!
@@ -117,16 +125,13 @@ class SingleProblem extends Component {
       <div>
         <div className="problem">
           <Card>
-            <div style={{padding: '10px', margin: '0px'}}>
+            <div style={{ padding: '10px', margin: '0px' }}>
               <CardBody>
                 <CardTitle>{singleProblem.name}</CardTitle>
                 <CardText>{singleProblem.description}</CardText>
               </CardBody>
             </div>
           </Card>
-          <button onClick={this.handleSubmit} type="submit">
-            Submit
-          </button>
           {this.state.showLoader ? <CylinderSpinLoader /> : null}
           <div className="result">{check()}</div>
         </div>
@@ -143,8 +148,18 @@ class SingleProblem extends Component {
               }}
               defaultValue={`function ${singleProblem.funcName}() {\n\n}`}
             />
-
-            <button type="button" onClick={this.handleShowAnswer}>
+            <button onClick={this.handleSubmit} style={{
+              margin: '20px 5px'
+            }
+            } type="submit">
+              Submit
+          </button>
+            <button type="button" onClick={this.handleShowAnswer}
+              style={{
+                margin: '20px 10px'
+              }
+              }
+            >
               Show Optimal Solution
             </button>
             {this.state.hideAnswer ? null : (
@@ -224,7 +239,7 @@ class SingleProblem extends Component {
             </VictoryChart>
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }
