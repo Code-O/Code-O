@@ -43,7 +43,7 @@ class SingleProblem extends Component {
     this.setState({showLoader:true})
     console.log(this.state.inputCode, 'input')
     axios
-      .post('https://code-o-local.herokuapp.com/secApp', {
+      .post('https://code-o-test.herokuapp.com/secApp', {
         code: this.state.inputCode
       })
       .then(res => res.data)
