@@ -23,7 +23,9 @@ Visit us at: http://code-o.herokuapp.com/
 - Postgres & Sequelize: Database & ORM
 - Redux: State Management
 - Docker: Container to Evaluate code
+  - Link to Container server: https://github.com/Code-O/container
 - Victory: Data Visualization
+
 
 ## Running
 
