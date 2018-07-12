@@ -38,6 +38,7 @@ class SingleProblem extends Component {
     this.setState({ inputCode: event })
   }
 
+  // Makes post request to seperate dockerized server. Runs our function and return its value
   handleSubmit = event => {
     event.preventDefault()
     this.setState({ showLoader: true })
@@ -69,7 +70,7 @@ class SingleProblem extends Component {
     const userSubmission = this.state.userSubmission
     let graphUserSubmission = userSubmission || ''
 
-    // Sets the data set values into its various data set sizes
+    // Retrieves data from user submission and captures it in data sets of various sizes
     let filterNums = graphUserSubmission.match(/[+-]?\d+(\.\d+)?/g) || ['']
     let dataSet = filterNums.map(num => Number(num))
     let smallDataSet = dataSet[5] || 0
@@ -77,7 +78,7 @@ class SingleProblem extends Component {
     let largeDataSet = dataSet[3] || 0
     let xLargeDataSet = dataSet[2] || 0
 
-    //Sets the users solution value from the stdpout from the docker container
+    // Retrieves the user's result
     let returnVal = userSubmission.split('solution')[1] || ''
     let solutionValueStr = returnVal.split(' ')[1] || ''
     let solutionValue = solutionValueStr.slice(0, solutionValueStr.indexOf('m') - 1)
